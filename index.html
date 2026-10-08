@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brightwater Dental Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Layout: sticky nav → split hero with live booking card → services ledger → first-visit sequence → team → reviews → visit info. Single column on phones. */
+:root{
+  --bg:#F3F7F6;          /* porcelain */
+  --surface:#FFFFFF;
+  --ink:#0E2B2A;         /* deep tidewater */
+  --muted:#4F6866;
+  --line:#D5E2DF;
+  --accent:#137A6F;      /* sea-glass teal */
+  --accent-ink:#FFFFFF;
+  --accent-soft:#DDF0EC;
+  --sun:#F6C453;         /* bright-smile yellow highlight */
+  --sun-ink:#3B2A00;
+  --shadow:0 18px 40px -24px rgba(14,43,42,.35);
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body:"Figtree", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1817; --surface:#112423; --ink:#E6F1EF; --muted:#9DB5B2; --line:#21403D;
+    --accent:#4CC3B4; --accent-ink:#06211E; --accent-soft:#163734; --sun:#F2C14E; --sun-ink:#2A1E00;
+    --shadow:0 18px 40px -24px rgba(0,0,0,.7); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1817; --surface:#112423; --ink:#E6F1EF; --muted:#9DB5B2; --line:#21403D;
+  --accent:#4CC3B4; --accent-ink:#06211E; --accent-soft:#163734; --sun:#F2C14E; --sun-ink:#2A1E00;
+  --shadow:0 18px 40px -24px rgba(0,0,0,.7); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1160px;margin-inline:auto;padding-inline:clamp(16px,4vw,32px)}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h2{font-size:clamp(2rem,4.2vw,3rem);font-weight:700}
+h3{font-size:1.25rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.lede{color:var(--muted);max-width:60ch}
+section{padding-block:clamp(56px,8vw,104px)}
+.sec-head{display:grid;gap:14px;margin-bottom:40px}
+
+/* demo ribbon */
+.demo{background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:.75rem;text-align:center;padding:6px 16px;letter-spacing:.06em}
+
+/* nav */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+.brand svg{flex:none}
+.links{display:flex;gap:28px;font-weight:500;font-size:.95rem}
+.links a{text-decoration:none;color:var(--muted)}
+.links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;cursor:pointer;font:600 .98rem var(--body);padding:12px 20px;border-radius:999px;text-decoration:none;transition:transform .15s ease, background .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+@media (max-width:860px){.links{display:none}}
+
+/* hero */
+.hero{padding-block:clamp(40px,6vw,80px) clamp(56px,7vw,96px)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,64px);align-items:center}
+.hero-grid > *{min-width:0}
+.hero h1{font-size:clamp(2.6rem,6.4vw,5rem);font-weight:800;letter-spacing:-.03em}
+.hero h1 mark{background:linear-gradient(transparent 58%,var(--sun) 58% 90%,transparent 90%);color:inherit;padding-inline:.06em}
+.hero .lede{margin-top:22px;font-size:1.15rem}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.facts{display:flex;flex-wrap:wrap;gap:28px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+.fact b{display:block;font-family:var(--display);font-size:1.6rem;font-weight:700;font-variant-numeric:tabular-nums}
+.fact span{font-size:.88rem;color:var(--muted)}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr}}
+
+/* booking card */
+.book{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,3vw,28px);box-shadow:var(--shadow);display:grid;gap:18px}
+.book-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.book-top h3{font-size:1.35rem}
+.open-now{font-family:var(--mono);font-size:.75rem;display:inline-flex;align-items:center;gap:6px;color:var(--accent)}
+.open-now i{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block}
+label.lbl{font-size:.8rem;font-weight:600;color:var(--muted);display:block;margin-bottom:6px}
+select,input[type=text],input[type=tel]{width:100%;font:500 1rem var(--body);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:11px 12px}
+select:focus,input:focus{outline:none;border-color:var(--accent)}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.chip{font:500 .85rem var(--body);background:var(--bg);color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:8px 4px;cursor:pointer;text-align:center;line-height:1.25;font-variant-numeric:tabular-nums}
+.chip small{display:block;font-family:var(--mono);font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.8}
+.chip:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:420px){.row2{grid-template-columns:1fr}.slots{grid-template-columns:repeat(3,1fr)}}
+.book .btn{width:100%;padding:14px}
+.fine{font-size:.78rem;color:var(--muted)}
+.confirm{background:var(--accent-soft);border-radius:14px;padding:18px;display:grid;gap:6px}
+.confirm b{font-family:var(--display);font-size:1.15rem}
+.err{color:#B4372D;font-size:.85rem}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .err{color:#FF8A80}}
+:root[data-theme="dark"] .err{color:#FF8A80}
+
+/* insurance strip */
+.strip{border-block:1px solid var(--line);padding-block:22px}
+.strip .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:14px 32px}
+.strip span.t{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.strip b{font-family:var(--display);font-weight:700;color:var(--muted);font-size:1.05rem}
+
+/* services ledger */
+.ledger{display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px}
+.svc{display:grid;grid-template-columns:auto 1fr auto;gap:4px 16px;padding-block:22px;border-top:1px solid var(--line);align-items:baseline}
+.svc > *{min-width:0}
+.code{font-family:var(--mono);font-size:.75rem;color:var(--accent);background:var(--accent-soft);padding:2px 7px;border-radius:6px}
+.svc p{grid-column:2 / 4;color:var(--muted);font-size:.95rem}
+.price{font-family:var(--mono);font-size:.9rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:760px){.ledger{grid-template-columns:1fr}.svc p{grid-column:1 / -1}}
+.ledger-note{margin-top:20px;font-size:.85rem;color:var(--muted)}
+
+/* first visit */
+.visit{background:var(--ink);color:var(--bg)}
+.visit .eyebrow{color:var(--sun)}
+.visit .lede{color:color-mix(in srgb,var(--bg) 72%,var(--ink))}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:s}
+.step{border-top:2px solid color-mix(in srgb,var(--bg) 25%,var(--ink));padding-top:18px;display:grid;gap:8px;align-content:start}
+.step .n{font-family:var(--mono);font-size:.8rem;color:var(--sun)}
+.step .min{font-family:var(--mono);font-size:.75rem;opacity:.7}
+.step p{color:color-mix(in srgb,var(--bg) 75%,var(--ink));font-size:.95rem}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* team */
+.team{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.doc{display:grid;gap:12px}
+.portrait{aspect-ratio:4/5;max-width:100%;border-radius:var(--r);display:grid;place-items:end start;padding:16px;position:relative;overflow:hidden}
+.portrait svg{position:absolute;inset:auto 0 0 0;width:100%;height:82%}
+.portrait .tag{position:relative;font-family:var(--mono);font-size:.72rem;background:var(--surface);color:var(--ink);padding:4px 9px;border-radius:999px}
+.p1{background:var(--accent-soft)} .p2{background:color-mix(in srgb,var(--sun) 35%,var(--bg))} .p3{background:color-mix(in srgb,var(--line) 70%,var(--bg))}
+.doc .role{font-size:.9rem;color:var(--muted)}
+@media (max-width:820px){.team{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.team{grid-template-columns:1fr}}
+
+/* reviews */
+.reviews{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:20px}
+.rev{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:14px;align-content:space-between}
+.rev q{quotes:none;font-size:1.02rem}
+.rev.big q{font-family:var(--display);font-size:1.45rem;font-weight:500;line-height:1.3}
+.rev .who{font-size:.85rem;color:var(--muted)}
+.stars{color:var(--sun);letter-spacing:2px;font-size:.95rem}
+@media (max-width:900px){.reviews{grid-template-columns:1fr}}
+
+/* faq + info */
+.info{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,64px)}
+.info > *{min-width:0}
+details{border-top:1px solid var(--line);padding-block:16px}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--accent)}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted);font-size:.97rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px;display:grid;gap:20px}
+.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hours td{padding:8px 0;border-bottom:1px dashed var(--line);font-size:.97rem}
+.hours td:last-child{text-align:right;font-family:var(--mono);font-size:.82rem;padding-left:12px}
+.hours tr.today td{color:var(--accent);font-weight:600}
+.contact{display:grid;gap:4px}
+.contact .big{font-family:var(--display);font-size:1.5rem;font-weight:700}
+.copy{background:none;border:0;color:var(--accent);font:600 .85rem var(--body);cursor:pointer;padding:0;justify-self:start}
+@media (max-width:860px){.info{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);font-size:.88rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}
+</style>
+</head>
+<body>
+
+<div class="demo">DEMO WEBSITE · Brightwater Dental Studio is a fictional practice</div>
+
+<header>
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="#top">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><path d="M9 4c-4 0-6.5 3.2-6 7.6.4 3.6 1.9 5.3 2.6 9 .6 3.4 1.2 7.4 3.6 7.4 2.6 0 2.4-6.6 6.8-6.6s4.2 6.6 6.8 6.6c2.4 0 3-4 3.6-7.4.7-3.7 2.2-5.4 2.6-9C29.5 7.2 27 4 23 4c-3 0-4.4 1.8-7 1.8S12 4 9 4z" fill="var(--accent)"/><path d="M9 9.5c1.6-.9 3.4-.6 4.6.2" stroke="var(--accent-ink)" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      Brightwater
+    </a>
+    <div class="links">
+      <a href="#services">Services</a>
+      <a href="#first-visit">First visit</a>
+      <a href="#team">Team</a>
+      <a href="#visit">Hours &amp; location</a>
+    </div>
+    <a class="btn btn-primary" href="#book">Book a visit</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Family &amp; cosmetic dentistry · Athwa, Surat</p>
+        <h1 style="margin-top:16px">Dentistry that feels like <mark>good news.</mark></h1>
+        <p class="lede">Gentle cleanings, painless root canals and clear aligners from a team that explains every step and every rupee before we start. Evening slots and Sunday mornings for busy families.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#book">See open times</a>
+          <a class="btn btn-ghost" href="#services">View services &amp; prices</a>
+        </div>
+        <div class="facts">
+          <div class="fact"><b>4.9★</b><span>from 1,240 patient reviews</span></div>
+          <div class="fact"><b>15 min</b><span>average wait time</span></div>
+          <div class="fact"><b>Since 2009</b><span>caring for families in Surat</span></div>
+        </div>
+      </div>
+
+      <form class="book" id="book" novalidate>
+        <div class="book-top">
+          <h3>Book an appointment</h3>
+          <span class="open-now" id="openNow"><i></i>Open now</span>
+        </div>
+        <div>
+          <label class="lbl" for="svc">Reason for visit</label>
+          <select id="svc">
+            <option>Consultation &amp; check-up</option>
+            <option>Cleaning (scaling &amp; polishing)</option>
+            <option>Tooth pain / emergency</option>
+            <option>Teeth whitening</option>
+            <option>Clear aligners consultation</option>
+            <option>Child's check-up</option>
+          </select>
+        </div>
+        <div>
+          <span class="lbl" id="dayLbl">Day</span>
+          <div class="days" id="days" role="group" aria-labelledby="dayLbl"></div>
+        </div>
+        <div>
+          <span class="lbl" id="slotLbl">Time</span>
+          <div class="slots" id="slots" role="group" aria-labelledby="slotLbl"></div>
+        </div>
+        <div class="row2">
+          <div><label class="lbl" for="nm">Your name</label><input id="nm" type="text" autocomplete="name" placeholder="Riya Patel"></div>
+          <div><label class="lbl" for="ph">Mobile number</label><input id="ph" type="tel" autocomplete="tel" placeholder="98765 43210"></div>
+        </div>
+        <p class="err" id="err" hidden></p>
+        <button class="btn btn-primary" type="submit">Request this time</button>
+        <p class="fine">We confirm on WhatsApp within one hour. Reschedule free up to 24 hours before.</p>
+        <div class="confirm" id="done" hidden>
+          <b id="doneTitle"></b>
+          <span id="doneText"></span>
+          <span class="fine">Demo site: no request was actually sent.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <span class="t">Pay your way</span>
+      <b>UPI</b><b>Credit &amp; debit cards</b><b>Cash</b><b>No-cost EMI</b>
+      <span class="t">We speak</span>
+      <b>ગુજરાતી · हिंदी · English</b>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Services &amp; prices</p>
+        <h2>Clear prices, listed up front.</h2>
+        <p class="lede">You'll know the cost and how long it takes before you sit in the chair. No hidden charges.</p>
+      </div>
+      <div class="ledger">
+        <div class="svc"><span class="code">20 min</span><h3>Consultation &amp; check-up</h3><span class="price">₹200</span><p>Full exam, oral cancer screening and a written treatment plan you can take home.</p></div>
+        <div class="svc"><span class="code">45 min</span><h3>Scaling &amp; polishing</h3><span class="price">₹1,000</span><p>Ultrasonic cleaning that removes tartar and stains. Most patients are done in one sitting.</p></div>
+        <div class="svc"><span class="code">10 min</span><h3>Digital OPG X-ray</h3><span class="price">₹400</span><p>Low-dose full-mouth X-ray, shown to you on screen right at the chair.</p></div>
+        <div class="svc"><span class="code">2 visits</span><h3>Zirconia crown (cap)</h3><span class="price">from ₹7,000</span><p>Metal-free, tooth-coloured cap that looks natural. Ready in 3–4 days.</p></div>
+        <div class="svc"><span class="code">60 min</span><h3>Teeth whitening</h3><span class="price">₹6,000</span><p>One in-clinic session. Up to eight shades brighter.</p></div>
+        <div class="svc"><span class="code">6–18 mo</span><h3>Clear aligners</h3><span class="price">from ₹55,000</span><p>Free 3D scan and preview of your new smile. No-cost EMI from ₹4,500/month.</p></div>
+        <div class="svc"><span class="code">1–2 visits</span><h3>Root canal treatment</h3><span class="price">from ₹3,500</span><p>Rotary RCT with painless anaesthesia. Single-sitting option for most teeth.</p></div>
+        <div class="svc"><span class="code">30 min</span><h3>Child check-up &amp; fluoride</h3><span class="price">₹300</span><p>Ages 3–13. A friendly first visit, fluoride coating and a small prize.</p></div>
+      </div>
+      <p class="ledger-note">Prices for 2026, inclusive of GST where applicable. Ask about our Family Smile Plan: ₹1,999 a year covers two cleanings and check-ups for each family member.</p>
+    </div>
+  </section>
+
+  <section class="visit" id="first-visit">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Your first visit</p>
+        <h2>About 75 minutes, start to finish.</h2>
+        <p class="lede">Here is exactly what happens, so nothing comes as a surprise.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="n">Step 1</span><h3>Check in</h3><span class="min">5 min</span><p>Fill a short form on WhatsApp before you arrive. Have a chai in the waiting lounge.</p></div>
+        <div class="step"><span class="n">Step 2</span><h3>Digital X-ray &amp; scan</h3><span class="min">15 min</span><p>A quick 3D scan replaces messy moulds. You see every image with us.</p></div>
+        <div class="step"><span class="n">Step 3</span><h3>Gentle cleaning</h3><span class="min">40 min</span><p>Headphones and a ceiling screen are yours if you want to relax.</p></div>
+        <div class="step"><span class="n">Step 4</span><h3>Plan &amp; pricing</h3><span class="min">15 min</span><p>Your dentist explains what they found and gives you a written cost estimate.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Meet the dentists</p>
+        <h2>Three doctors, one shared rule: no surprises.</h2>
+      </div>
+      <div class="team">
+        <div class="doc">
+          <div class="portrait p1"><svg viewBox="0 0 200 180" aria-hidden="true"><circle cx="100" cy="62" r="38" fill="var(--accent)" opacity=".55"/><path d="M28 180c4-48 34-72 72-72s68 24 72 72z" fill="var(--accent)" opacity=".75"/></svg><span class="tag">MDS · 17 yrs</span></div>
+          <h3>Dr. Meera Desai</h3><p class="role">Founder · Prosthodontist &amp; cosmetic dentistry</p>
+        </div>
+        <div class="doc">
+          <div class="portrait p2"><svg viewBox="0 0 200 180" aria-hidden="true"><circle cx="100" cy="62" r="38" fill="var(--sun-ink)" opacity=".35"/><path d="M28 180c4-48 34-72 72-72s68 24 72 72z" fill="var(--sun-ink)" opacity=".5"/></svg><span class="tag">MDS · 11 yrs</span></div>
+          <h3>Dr. Kunal Mehta</h3><p class="role">Orthodontist · Aligners &amp; braces</p>
+        </div>
+        <div class="doc">
+          <div class="portrait p3"><svg viewBox="0 0 200 180" aria-hidden="true"><circle cx="100" cy="62" r="38" fill="var(--muted)" opacity=".5"/><path d="M28 180c4-48 34-72 72-72s68 24 72 72z" fill="var(--muted)" opacity=".7"/></svg><span class="tag">BDS · 8 yrs</span></div>
+          <h3>Dr. Ananya Joshi</h3><p class="role">Kids' dentistry &amp; anxious-patient care</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Sample patient reviews</p>
+        <h2>What patients say after the chair.</h2>
+      </div>
+      <div class="reviews">
+        <div class="rev big"><q>I avoided the dentist for six years because I was scared. Nobody scolded me. They made a plan and told me the full cost on day one.</q><div><div class="stars">★★★★★</div><span class="who">Harsh S. · Adajan</span></div></div>
+        <div class="rev"><q>Had a root canal on my lunch break and felt no pain at all. Went straight back to work.</q><div><div class="stars">★★★★★</div><span class="who">Nidhi P. · Vesu</span></div></div>
+        <div class="rev"><q>My kids actually ask when they can go back. Dr. Joshi is wonderful with them.</q><div><div class="stars">★★★★★</div><span class="who">Rakesh M. · Parent, Piplod</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" style="padding-top:0">
+    <div class="wrap info">
+      <div>
+        <div class="sec-head" style="margin-bottom:24px">
+          <p class="eyebrow">Common questions</p>
+          <h2>Before you book</h2>
+        </div>
+        <details open><summary>Can I claim my treatment on insurance?</summary><p>If your health policy covers dental treatment, we give you itemised bills, X-rays and reports for your claim. Our front desk helps you fill the forms.</p></details>
+        <details><summary>What if I'm nervous about the dentist?</summary><p>Tell us when you book. We offer longer appointments, numbing gel before every injection and a "stop" hand signal that we always respect.</p></details>
+        <details><summary>Do you see dental emergencies?</summary><p>Yes. We keep emergency slots every day, including Sunday morning. Call or WhatsApp us and we'll fit you in.</p></details>
+        <details><summary>Is there parking?</summary><p>Free parking for cars and two-wheelers in the building basement. The clinic is a two-minute walk from Athwa Gate.</p></details>
+      </div>
+      <div class="card">
+        <div>
+          <p class="eyebrow">Clinic hours</p>
+          <table class="hours" id="hours" aria-label="Clinic hours">
+            <tr data-d="1"><td>Monday</td><td>10:00–1:30 · 5:00–9:00</td></tr>
+            <tr data-d="2"><td>Tuesday</td><td>10:00–1:30 · 5:00–9:00</td></tr>
+            <tr data-d="3"><td>Wednesday</td><td>10:00–1:30 · 5:00–9:00</td></tr>
+            <tr data-d="4"><td>Thursday</td><td>10:00–1:30 · 5:00–9:00</td></tr>
+            <tr data-d="5"><td>Friday</td><td>10:00–1:30 · 5:00–9:00</td></tr>
+            <tr data-d="6"><td>Saturday</td><td>10:00–1:30 · 5:00–9:00</td></tr>
+            <tr data-d="0"><td>Sunday</td><td>10:00–1:00</td></tr>
+          </table>
+        </div>
+        <div class="contact">
+          <p class="eyebrow">Call or WhatsApp</p>
+          <span class="big" id="phone">+91 98765 43210</span>
+          <button class="copy" type="button" id="copyPhone">Copy number</button>
+        </div>
+        <div class="contact">
+          <p class="eyebrow">Find us</p>
+          <span>2nd Floor, Brightwater House, Ghod Dod Road<br>Athwa, Surat, Gujarat 395007</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Brightwater Dental Studio · Demo website</span>
+    <span>Lift access · Wheelchair friendly</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // sessions per weekday, in hours (13.5 = 1:30 pm)
+  const am=[10,13.5],pm=[17,21];
+  const hrs={0:[[10,13]],1:[am,pm],2:[am,pm],3:[am,pm],4:[am,pm],5:[am,pm],6:[am,pm]};
+  const today=new Date();
+  const dn=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const mn=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const tr=document.querySelector('#hours tr[data-d="'+today.getDay()+'"]'); if(tr) tr.classList.add('today');
+  const nowH=today.getHours()+today.getMinutes()/60;
+  const openEl=document.getElementById('openNow');
+  if(!hrs[today.getDay()].some(([a,z])=>nowH>=a&&nowH<z)){openEl.innerHTML='<i style="background:var(--muted)"></i>Closed now';openEl.style.color='var(--muted)';}
+
+  const days=[]; for(let i=1;days.length<5;i++){const d=new Date(today);d.setDate(today.getDate()+i);days.push(d);}
+  const dayBox=document.getElementById('days'), slotBox=document.getElementById('slots');
+  let selDay=0, selSlot=null;
+  // deterministic "booked" slots so the demo looks realistic
+  const taken=(d,t)=>((d.getDate()*7+Math.round(t*2)*3)%5)===0;
+  const fmt=t=>{const H=Math.floor(t),M=t%1?'30':'00';const ap=H>=12?'pm':'am';return ((H+11)%12+1)+':'+M+' '+ap;};
+  function renderDays(){
+    dayBox.innerHTML='';
+    days.forEach((d,i)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('aria-pressed',i===selDay);
+      b.innerHTML='<small>'+dn[d.getDay()]+'</small>'+d.getDate()+' '+mn[d.getMonth()];
+      b.onclick=()=>{selDay=i;selSlot=null;renderDays();renderSlots();};dayBox.appendChild(b);});
+  }
+  function renderSlots(){
+    slotBox.innerHTML='';const d=days[selDay];
+    hrs[d.getDay()].forEach(([a,z])=>{for(let t=a;t<=z-1;t+=1){const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=fmt(t);
+      b.disabled=taken(d,t);b.setAttribute('aria-pressed',selSlot===t);
+      b.onclick=()=>{selSlot=t;renderSlots();};slotBox.appendChild(b);}});
+  }
+  renderDays();renderSlots();
+
+  const form=document.getElementById('book'),err=document.getElementById('err'),done=document.getElementById('done');
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const nm=document.getElementById('nm').value.trim(),ph=document.getElementById('ph').value.trim();
+    let msg='';
+    if(selSlot===null)msg='Pick a time to continue.';
+    else if(!nm)msg='Add your name so we know who to expect.';
+    else if(ph.replace(/\D/g,'').length<10)msg='Enter your 10-digit mobile number so we can send your confirmation.';
+    err.hidden=!msg;err.textContent=msg;if(msg){done.hidden=true;return;}
+    const d=days[selDay];
+    document.getElementById('doneTitle').textContent='Thank you, '+nm.split(' ')[0]+'. Your slot is on hold.';
+    document.getElementById('doneText').textContent=document.getElementById('svc').value+' · '+dn[d.getDay()]+', '+d.getDate()+' '+mn[d.getMonth()]+' at '+fmt(selSlot)+'. We\'ll confirm on WhatsApp at '+ph+'.';
+    done.hidden=false;
+  });
+
+  document.getElementById('copyPhone').addEventListener('click',e=>{
+    const t=document.getElementById('phone').textContent,btn=e.currentTarget;
+    const ok=()=>{btn.textContent='Copied';setTimeout(()=>btn.textContent='Copy number',1600);};
+    try{navigator.clipboard.writeText(t).then(ok,()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('phone'));const s=getSelection();s.removeAllRanges();s.addRange(r);});}catch(_){}
+  });
+})();
+</script>
+</body>
+</html>
